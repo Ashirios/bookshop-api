@@ -1,6 +1,6 @@
-package com.github.Axcol3.bookshop_api.repository;
+package com.github.Ashirios.bookshop_api.repository;
 
-import com.github.Axcol3.bookshop_api.entity.User;
+import com.github.Ashirios.bookshop_api.entity.User;
 
 public class UserRepository {
 

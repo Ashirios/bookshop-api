@@ -1,4 +1,4 @@
-package com.github.Axcol3.bookshop_api.dto;
+package com.github.Ashirios.bookshop_api.dto;
 
 import java.math.BigDecimal;
 import lombok.AllArgsConstructor;
@@ -11,10 +11,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class BookStoreDto {
+public class UserProfileDto {
 
-    private String title;
-    private String author;
-    private BigDecimal price;
-    
+    private String username;
+    private String email;
+    private BigDecimal balance;
+
 }

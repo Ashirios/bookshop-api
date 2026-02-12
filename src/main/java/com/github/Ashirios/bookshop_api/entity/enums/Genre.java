@@ -1,4 +1,4 @@
-package com.github.Axcol3.bookshop_api.entity.enums;
+package com.github.Ashirios.bookshop_api.entity.enums;
 
 public enum Genre {
 

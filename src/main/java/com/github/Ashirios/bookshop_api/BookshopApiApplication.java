@@ -1,4 +1,4 @@
-package com.github.Axcol3.bookshop_api;
+package com.github.Ashirios.bookshop_api;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
