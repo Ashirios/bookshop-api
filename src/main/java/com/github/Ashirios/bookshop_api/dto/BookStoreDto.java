@@ -1,20 +1,28 @@
 package com.github.Ashirios.bookshop_api.dto;
 
 import java.math.BigDecimal;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import java.util.Set;
 
+import com.github.Ashirios.bookshop_api.entity.enums.Genre;
+
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+import lombok.Data;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
 public class BookStoreDto {
-
+    @NotBlank
     private String title;
-    private String author;
+
+    @NotNull
+    private Long authorId;
+
+    @NotNull
+    @Positive
     private BigDecimal price;
-    
+
+    private Set<Genre> genres;
+    private int pageCount;
+    private int publicationYear;
 }

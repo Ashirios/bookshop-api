@@ -2,10 +2,9 @@ package com.github.Ashirios.bookshop_api.entity;
 
 import java.util.Set;
 
-import com.github.Ashirios.bookshop_api.entity.enums.Role;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -21,13 +20,12 @@ import lombok.NoArgsConstructor;
 public class Author {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String name;
     private String biography;
+
     @OneToMany(mappedBy = "author")
     private Set<Book> books;
-    private Role role;
-    
-
 }
