@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.util.Set;
 
 import com.github.Ashirios.bookshop_api.entity.enums.Genre;
-import com.github.Ashirios.bookshop_api.entity.enums.Role;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
@@ -12,17 +11,13 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-
-
-
-
 
 @Entity
 @Data
@@ -32,15 +27,15 @@ import lombok.NoArgsConstructor;
 public class Book {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
     @Column(nullable = false)
     private String title;
 
     @ManyToOne(optional = false)
     private Author author;
-    
+
     @Column(nullable = false)
     private BigDecimal price;
 
@@ -51,6 +46,4 @@ public class Book {
     private int pageCount;
     private int publicationYear;
     private Double rating;
-    private Role role;
-
 }
