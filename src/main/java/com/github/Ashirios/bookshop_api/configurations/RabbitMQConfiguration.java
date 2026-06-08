@@ -1,54 +1,36 @@
 package com.github.Ashirios.bookshop_api.configurations;
 
 import org.springframework.amqp.core.*;
-import org.springframework.amqp.rabbit.connection.ConnectionFactory;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.amqp.support.converter.DefaultJackson2JavaTypeMapper;
-import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
+import org.springframework.amqp.support.converter.JacksonJsonMessageConverter;
 import org.springframework.amqp.support.converter.MessageConverter;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 @Configuration
-@SuppressWarnings("deprecation")
 public class RabbitMQConfiguration {
 
-    @Value("${order.queue.name}")
-    private String queueName;
-
-    @Value("${order.exchange.name}")
-    private String exchangeName;
-
-    @Value("${order.routing.key}")
-    private String routingKey;
+    public static final String ORDER_QUEUE = "order.queue";
+    public static final String ORDER_EXCHANGE = "order.exchange";
+    public static final String ORDER_ROUTING_KEY = "order.routingKey";
 
     @Bean
-    public Queue queue() {
-        return new Queue(queueName, true);
+    public Queue orderQueue() {
+        return new Queue(ORDER_QUEUE, true);
     }
 
     @Bean
-    public TopicExchange exchange() {
-        return new TopicExchange(exchangeName);
+    public TopicExchange orderExchange() {
+        return new TopicExchange(ORDER_EXCHANGE);
     }
 
     @Bean
-    public Binding binding() {
-        return BindingBuilder.bind(queue()).to(exchange()).with(routingKey);
+    public Binding binding(Queue orderQueue, TopicExchange orderExchange) {
+        return BindingBuilder.bind(orderQueue).to(orderExchange).with(ORDER_ROUTING_KEY);
     }
 
-     @Bean
-    public MessageConverter messageConverter() {
-        return new Jackson2JsonMessageConverter();
-    }
 
     @Bean
-    public RabbitTemplate rabbitTemplate(ConnectionFactory connectionFactory) {
-        RabbitTemplate template = new RabbitTemplate(connectionFactory);
-        template.setMessageConverter(messageConverter());
-        return template;
+    public MessageConverter jsonMessageConverter() {
+        return new JacksonJsonMessageConverter();
     }
 }
